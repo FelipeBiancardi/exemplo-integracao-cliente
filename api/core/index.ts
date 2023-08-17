@@ -2,8 +2,16 @@ import { APIGatewayEvent, Context } from 'aws-lambda';
 import createAPI from 'lambda-api';
 import axios from 'axios';
 
-const api = createAPI();
+const api = createAPI({});
 
+api.use((req, res, next) => {
+	res.cors({
+		origin: '*',
+		headers: 'Content-Type,Authorization',
+		methods: 'GET,POST,PUT,DELETE',
+	});
+	next();
+});
 
 
 api.get('/integracao', async (req, res) => {
@@ -29,7 +37,7 @@ api.get('/integracao/reset', async (req, res) => {
 			'Content-Type': 'application/json'
 		}
 	})
-	res.json({message: "Sucesso"})
+	res.json({ message: "Sucesso" })
 })
 
 
