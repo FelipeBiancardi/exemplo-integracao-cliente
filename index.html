@@ -1,52 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <style>
+    body {
+      background: #efefef;
+    }
+
+    pre {
+      background-color: ghostwhite;
+      border: 1px solid silver;
+      padding: 10px 20px;
+      margin: 20px;
+      border-radius: 4px;
+      width: 25%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
 </head>
+
 <body>
   <div class="w-screen h-screen">
-    <button id="enviar">Enviar</button>
+    <pre>
+      <code id=cadastro_json></code>
+    </pre>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script>
-    const btnEnviar = document.getElementById('enviar')
+    Object.prototype.prettyPrint = function () {
+      var jsonLine = /^( *)("[\w]+": )?("[^"]*"|[\w.+-]*)?([,[{])?$/mg;
+      var replacer = function (match, pIndent, pKey, pVal, pEnd) {
+        var key = '<span class="json-key" style="color: brown">',
+          val = '<span class="json-value" style="color: navy">',
+          str = '<span class="json-string" style="color: olive">',
+          r = pIndent || '';
+        if (pKey)
+          r = r + key + pKey.replace(/[": ]/g, '') + '</span>: ';
+        if (pVal)
+          r = r + (pVal[0] == '"' ? str : val) + pVal + '</span>';
+        return r + (pEnd || '');
+      };
+
+      return JSON.stringify(this, null, 3)
+        .replace(/&/g, '&amp;').replace(/\\"/g, '&quot;')
+        .replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(jsonLine, replacer);
+    }
 
     async function initPage(){
-      let initData = await getCadastroDatabase()
-      console.log(initData)
+      const response = await axios.get('/integracao')
+      document.getElementById('cadastro_json').innerHTML = response.data.prettyPrint()
     }
-
+    
     initPage()
-
-    async function getCadastroDatabase(){
-      const response = await fetch("https://api.jsonstorage.net/v1/json/42fd61f0-4b50-4085-9d3b-b782b5f12341/42efa98a-5d08-4578-b569-0e9ddd282a20")
-      const jsonData = await response.json()
-      return jsonData?.cadastro || []
-    }
-
-    async function patchCadastroDatabase(){
-
-    }
-
-    const bodySend = {
-      cadastro: [{
-        nome: "Matheus",
-        idade: 36
-      }]
-    }
-
-    btnEnviar.addEventListener("click", function(){
-      fetch("https://api.jsonstorage.net/v1/json/42fd61f0-4b50-4085-9d3b-b782b5f12341/42efa98a-5d08-4578-b569-0e9ddd282a20?apiKey=565deae6-50a4-4f37-a54a-21d60c2f54d8", {
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        method: "PATCH",
-        body: JSON.stringify(bodySend)
-      })
-    })
 
   </script>
 </body>
+
 </html>
