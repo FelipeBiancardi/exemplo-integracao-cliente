@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const api = createAPI();
 
-api.get('/integracao', async (req, res) => {
+api.post('/integracao', async (req, res) => {
 	const { v_card } = req.body
 	res.json(v_card)
 })
