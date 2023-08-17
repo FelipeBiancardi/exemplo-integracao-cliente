@@ -26,5 +26,10 @@
   "bugs": {
     "url": "https://github.com/bohr-io/openai-template/issues"
   },
-  "homepage": "https://github.com/bohr-io/openai-template#readme"
+  "homepage": "https://github.com/bohr-io/openai-template#readme",
+  "devDependencies": {
+    "autoprefixer": "^10.4.15",
+    "postcss": "^8.4.28",
+    "tailwindcss": "^3.3.3"
+  }
 }

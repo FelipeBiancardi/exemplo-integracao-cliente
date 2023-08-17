@@ -1,20 +1,17 @@
 import { APIGatewayEvent, Context } from 'aws-lambda';
-import { Configuration, OpenAIApi } from 'openai';
 import createAPI from 'lambda-api';
+import axios from 'axios';
 
 const api = createAPI();
-const configuration = new Configuration({
-	apiKey: process.env.OPENAI_API_KEY,
-});
-const openai = new OpenAIApi(configuration);
 
-api.get('/', async (req, res) => {
-	const completion = await openai.createCompletion({
-		model: "text-davinci-003",
-		prompt: req.query.prompt,
-		max_tokens: 256
-	});
-	return { result: completion.data.choices[0].text };
+api.get('/integracao', async (req, res) => {
+	const { v_card } = req.body
+	res.json(v_card)
+})
+
+api.get('/integracao', async (req, res) => {
+	const { data } = await axios.get("https://api.jsonstorage.net/v1/json/42fd61f0-4b50-4085-9d3b-b782b5f12341/42efa98a-5d08-4578-b569-0e9ddd282a20")
+	res.json(data)
 })
 
 export async function handler(event: APIGatewayEvent, context: Context) {
