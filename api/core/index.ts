@@ -5,7 +5,7 @@ import axios from 'axios';
 const api = createAPI({});
 
 
-const VERSION = "2.1.0"
+const VERSION = "2.3.0"
 
 // Middleware para configurar CORS
 api.use((req, res, next) => {
