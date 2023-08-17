@@ -32,7 +32,7 @@ api.post('/integracao', async (req, res) => {
 			'Content-Type': 'application/json'
 		}
 	})
-	res.header('Access-Control-Allow-Origin', 'https://right-batman-beige-thailand.bohr.io');
+	res.header('Access-Control-Allow-Origin', '*');
 	res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH');
 	res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
 	res.header('Version', VERSION)
