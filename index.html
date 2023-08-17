@@ -52,7 +52,7 @@
     }
 
     async function initPage(){
-      const response = await axios.get('/integracao')
+      const response = await axios.get('/api/integracao')
       document.getElementById('cadastro_json').innerHTML = response.data.prettyPrint()
     }
     
