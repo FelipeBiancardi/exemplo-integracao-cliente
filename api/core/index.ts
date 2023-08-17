@@ -5,17 +5,7 @@ import axios from 'axios';
 const api = createAPI({});
 
 
-const VERSION = "2.3.0"
-
-// Middleware para configurar CORS
-api.use((req, res, next) => {
-	res.header('Access-Control-Allow-Origin', '*'); // Ou especifique um domínio específico aqui
-	res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-	res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-	res.header('Access-Control-Allow-Credentials', 'true');
-	res.header('apikey', 'apikey');
-	next();
-});
+const VERSION = "2.4.0"
 
 // Middleware para ignorar solicitações OPTIONS
 api.use((req, res, next) => {
@@ -43,6 +33,10 @@ api.post('/integracao', async (req, res) => {
 			'Content-Type': 'application/json'
 		}
 	})
+	res.header('Access-Control-Allow-Origin', '*'); // Ou especifique um domínio específico aqui
+	res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+	res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+	res.header('apikey', 'apikey');
 	res.json(v_card)
 })
 
