@@ -12,7 +12,19 @@ api.get('/integracao', async (req, res) => {
 		credentials: true,
 	});
 	const { data } = await axios.get("https://api.jsonstorage.net/v1/json/42fd61f0-4b50-4085-9d3b-b782b5f12341/42efa98a-5d08-4578-b569-0e9ddd282a20")
+	res.header('Access-Control-Allow-Origin', '*');
+	res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
+	res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+	res.header('Version', '1.0.0')
 	res.json(data)
+})
+
+api.get('/integracao', async (req, res) => {
+	res.header('Access-Control-Allow-Origin', '*');
+	res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
+	res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+	res.header('Version', '1.0.0')
+	res.json({version: '1.0.0'})
 })
 
 api.post('/integracao', async (req, res) => {
@@ -28,6 +40,10 @@ api.post('/integracao', async (req, res) => {
 			'Content-Type': 'application/json'
 		}
 	})
+	res.header('Access-Control-Allow-Origin', '*');
+	res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
+	res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+	res.header('Version', '1.0.0')
 	res.json(v_card)
 })
 
@@ -43,6 +59,10 @@ api.get('/integracao/reset', async (req, res) => {
 			'Content-Type': 'application/json'
 		}
 	})
+	res.header('Access-Control-Allow-Origin', '*');
+	res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
+	res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+	res.header('Version', '1.0.0')
 	res.json({ message: "Sucesso" })
 })
 
