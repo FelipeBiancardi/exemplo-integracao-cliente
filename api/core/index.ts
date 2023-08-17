@@ -5,24 +5,33 @@ import axios from 'axios';
 const api = createAPI({});
 
 
-const VERSION = "2.2.0"
+const VERSION = "2.1.0"
 
-function registerCors(res: Response) {
+// Middleware para configurar CORS
+api.use((req, res, next) => {
 	res.header('Access-Control-Allow-Origin', '*'); // Ou especifique um domínio específico aqui
 	res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
 	res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-	res.header('Version', VERSION)
-}
+	res.header('Access-Control-Allow-Credentials', 'true');
+	res.header('apikey', 'apikey');
+	next();
+});
 
+// Middleware para ignorar solicitações OPTIONS
+api.use((req, res, next) => {
+	if (req.method === 'OPTIONS') {
+		res.sendStatus(204); // Responda com um status 204 No Content
+	} else {
+		next();
+	}
+});
 
 api.get('/integracao', async (req, res) => {
 	const { data } = await axios.get("https://api.jsonstorage.net/v1/json/42fd61f0-4b50-4085-9d3b-b782b5f12341/42efa98a-5d08-4578-b569-0e9ddd282a20")
-	registerCors(res)
 	res.json(data)
 })
 
 api.get('/status', async (req, res) => {
-	registerCors(res)
 	res.json({ version: VERSION })
 })
 
@@ -34,7 +43,6 @@ api.post('/integracao', async (req, res) => {
 			'Content-Type': 'application/json'
 		}
 	})
-	registerCors(res)
 	res.json(v_card)
 })
 
