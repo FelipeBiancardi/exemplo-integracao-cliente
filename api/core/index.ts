@@ -5,7 +5,7 @@ import axios from 'axios';
 const api = createAPI({});
 
 
-const VERSION = "2.0.0"
+const VERSION = "2.1.0"
 
 api.get('/integracao', async (req, res) => {
 	const { data } = await axios.get("https://api.jsonstorage.net/v1/json/42fd61f0-4b50-4085-9d3b-b782b5f12341/42efa98a-5d08-4578-b569-0e9ddd282a20")
