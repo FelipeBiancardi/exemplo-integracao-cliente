@@ -26,6 +26,7 @@ api.get('/status', async (req, res) => {
 })
 
 api.post('/integracao', async (req, res) => {
+	res.cors();
 	const { v_card } = req.body
 	const bodyData = { cadastro: [v_card] }
 	axios.patch("https://api.jsonstorage.net/v1/json/42fd61f0-4b50-4085-9d3b-b782b5f12341/42efa98a-5d08-4578-b569-0e9ddd282a20?apiKey=565deae6-50a4-4f37-a54a-21d60c2f54d8", bodyData, {
@@ -33,10 +34,6 @@ api.post('/integracao', async (req, res) => {
 			'Content-Type': 'application/json'
 		}
 	})
-	res.header('Access-Control-Allow-Origin', '*'); // Ou especifique um domínio específico aqui
-	res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-	res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-	res.header('apikey', 'apikey');
 	res.json(v_card)
 })
 

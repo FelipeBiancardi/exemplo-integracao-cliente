@@ -5,6 +5,8 @@
     "noImplicitAny": true,
     "preserveConstEnums": true,
     "outDir": "./dist",
-    "sourceMap": true
+    "sourceMap": true,
+    "skipDefaultLibCheck": true,
+    "strict": false
   }
 }
