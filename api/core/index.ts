@@ -5,6 +5,8 @@ import axios from 'axios';
 const api = createAPI({});
 
 api.use((req, res, next) => {
+	res.header('Access-Control-Allow-Origin', '*');
+	res.header('ChaveAleatoria', 'Testando');
 	res.cors({
 		origin: '*',
 		headers: 'Content-Type,Authorization',
