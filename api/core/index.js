@@ -7,7 +7,7 @@ const VERSION = uuidv4();
 // Middleware para habilitar o CORS em todas as rotas
 api.use((req, res, next) => {
   res.cors({
-    origin: 'https://right-batman-beige-thailand.bohr.io', // Permitir todas as origens (mudar para a origem real da página da web)
+    origin: '*', // Permitir todas as origens (mudar para a origem real da página da web)
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'], 
     headers: ['Content-Type', 'Authorization'], 
   });
